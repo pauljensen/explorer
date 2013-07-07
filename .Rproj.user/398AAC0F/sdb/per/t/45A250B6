@@ -1,0 +1,16 @@
+{
+    "contents" : "\n# datafile format:  filename.od\n# \n# Columns:\n#   time value well plate experiment\n#\n# Descriptions:\n#         time:  hours since experiment start\n#        value:  OD reading\n#         well:  integer well ID -- 1 (A1) through 96 (H12)\n#        plate:  plate ID\n#   experiment:  experiment ID\n#\n# \n\nget.experiment.filenames <- function() {\n  all.files <- list.files(path=\"./data\",pattern=\"\\\\.od$\")\n  return(all.files)\n}\n\nload.experiment.file <- function(filename) {\n  read.table(paste(\"./data/\",filename,sep=\"\"),\n             as.is=TRUE, header=TRUE, sep=\"\\t\",\n             colClasses=c(\"numeric\",\"numeric\",\"integer\",\n                           \"character\",\"character\"))\n}\n\n",
+    "created" : 1370022059580.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2226138825",
+    "id" : "45A250B6",
+    "lastKnownWriteTime" : 1370028348,
+    "path" : "~/Dropbox/work/minireader/client/explorer/file_io.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}

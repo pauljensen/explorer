@@ -1,0 +1,16 @@
+{
+    "contents" : "\nlibrary(shiny)\nlibrary(plyr)\n\n\npageWithoutSidebar <- function(headerPanel,mainPanel) {\n  bootstrapPage(div(class=\"container-fluid\", \n                    div(class=\"row-fluid\",headerPanel),\n                    div(class=\"row-fluid\",mainPanel)))\n}\n\n\nshinyUI(pageWithoutSidebar(\n  headerPanel(\"Minireader Data Explorer\"),\n  \n  mainPanel(\n    tabsetPanel(\n      \n      # ============== Load Data tab ==================\n      tabPanel(\"Load Data\",\n        uiOutput(\"load.data.file.selector\"),\n        verbatimTextOutput(\"load.data.summary\")\n      ),\n      \n      # ============== Plate View tab ==================\n      tabPanel(\"Plate View\",\n        div(class=\"container-fluid\",\n            div(class=\"row-fluid\",\n                div(class=\"span6\",\n                    uiOutput(\"plate.view.plate.selector\")\n                ),\n                div(class=\"span6\",\n                    radioButtons(\"plate.view.plot.type\",\"Plot type:\",\n                                 c(\"Growth Rates\" = \"rates\",\n                                   \"Growth Curves\" = \"curves\"))\n                )\n            ),\n            div(class=\"row-fluid\",\n                plotOutput(\"plate.view.plot\")\n            )\n        )         \n      ),\n      \n      # ============== Well View tab ==================\n      tabPanel(\"Well View\",\n        pageWithSidebar(\n          headerPanel(\"\"),\n          div(class=\"span6\",\n              uiOutput(\"well.view.plate.selector\"),\n              uiOutput(\"well.view.well.grids\")\n          ),\n          div(class=\"span6\",\n              plotOutput(\"well.view.plot\")\n          )\n        )       \n      ),\n      \n      # ============== Export Data tab ==================\n      tabPanel(\"Export Data\")\n    )\n  )\n))\n",
+    "created" : 1370008122618.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1198233659",
+    "id" : "DF7FBE70",
+    "lastKnownWriteTime" : 1371045882,
+    "path" : "~/Dropbox/work/minireader/client/explorer/ui.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

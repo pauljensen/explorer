@@ -1,0 +1,16 @@
+{
+    "contents" : "\n\ncalculate.growth.rate <- function(df,stride=10,window.frac=0.20,transform=log) {\n  t <- df$time\n  od <- df$value\n  n <- length(t)\n  width <- floor(window.frac * n)\n  if (!is.null(transform))\n    od <- transform(od)\n  best <- list(rate=NULL,t.start=NULL,t.end=NULL)\n  for (i in seq.int(1,n-width,stride)) {\n    x <- t[i:(i+width)]\n    y <- od[i:(i+width)]\n    model <- lm(y ~ x)\n    if (is.null(best$rate) || (model$coefficients[\"x\"] > best$rate))\n      best <- list(rate=model$coefficients[\"x\"],t.start=t[i],t.end=t[i+width])\n  }\n  names(best$rate) <- NULL  # remove the name \"x\" on rate from the linear model\n  return(best)\n}\n\n\ncalculate.growth.rates <- function(data,...) {\n  ddply(data,\n        .(experiment,plate,well),\n        function(x) as.data.frame(calculate.growth.rate(x)))\n}\n\n",
+    "created" : 1370027388119.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "640244629",
+    "id" : "952BD06D",
+    "lastKnownWriteTime" : 1370029382,
+    "path" : "~/Dropbox/work/minireader/client/explorer/processing.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}
